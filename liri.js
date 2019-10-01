@@ -16,7 +16,7 @@ module.exports.liri = {
     connected: function () {
         console.log('Liri is connected!');
     },
-    mainSwitch: function (command, input) {
+    mainSwitch: (command, input) => {
         switch (command) {
             case 'get-tweets':
                 exports.liri.twitterGet(exports.liri.twitterScreenName, exports.liri.twitterLog);
@@ -34,10 +34,10 @@ module.exports.liri = {
             exports.liri.appendLog(`Error! Not an accepted command: '${command}'`);
         }
     },
-    twitterGet: function (screenName, callback) {
+    twitterGet: (screenName, callback) => {
         client.get('statuses/user_timeline', { screen_name: screenName }, callback);
     },
-    twitterLog: function (err, tweets, res) {
+    twitterLog: (err, tweets, res) => {
         if (!err) {
             tweets.forEach(function (tweet) {
                 exports.liri.appendLog(`${tweet.text}\nSHARED ON: ${tweet.created_at}`);
@@ -48,7 +48,7 @@ module.exports.liri = {
             console.log(err.status);
         }
     },
-    spotifyThis: function (trackName) {
+    spotifyThis: (trackName) => {
         spotify.search({ type: 'track', query: trackName, limit: 1 }, function (err, data) {
             if (err) {
                 exports.liri.appendLog('Error occurred: ' + err);
@@ -64,7 +64,7 @@ module.exports.liri = {
 
         });
     },
-    requestMovieTitle: function (movieTitle) {
+    requestMovieTitle: (movieTitle) => {
         let baseURL = 'http://www.omdbapi.com/?apikey=trilogy&t='
         let queryURL = baseURL.concat(movieTitle);
         exports.liri.appendLog(queryURL);
@@ -94,7 +94,7 @@ module.exports.liri = {
             exports.liri.appendLog(err)
         });
     },
-    doWhatItSays: function (fileName) {
+    doWhatItSays: (fileName) => {
         fs.readFile(fileName, 'utf-8', function (err, data) {
             if (!err) {
                 let fileString = JSON.stringify(data);
@@ -120,7 +120,7 @@ module.exports.liri = {
             }
         });
     },
-    appendLog: function (...inputs) {
+    appendLog:(...inputs) => {
 
         for (input of inputs) { // append log
             fs.appendFile('./log.txt', '\n' + input, function (err) {
