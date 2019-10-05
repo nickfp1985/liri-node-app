@@ -5,7 +5,7 @@ app.liri.connected(); // checks liri connection
 
 runLiri();
 
-function runLiri() {
+const runLiri = () => {
     // read the liri command and activate the corresponding functions
     inquirer.prompt([
         {
@@ -14,7 +14,7 @@ function runLiri() {
             name: "command",
             choices: ['get-tweets', 'spotify-this-song', 'movie-this', 'do-what-it-says']
         }
-    ]).then(function (answers) {
+    ]).then((answers) => {
         let command = answers.command; // user input
         switch (command) {
             case 'get-tweets':
@@ -36,7 +36,7 @@ function runLiri() {
 
 // **************************************************************************
 
-function omdbReq() {
+const omdbReq = () => {
     inquirer.prompt([
         {
             message: "Movie:",
@@ -51,7 +51,7 @@ function omdbReq() {
     })
 }
 
-function spotifyReq() {
+const spotifyReq = () => {
     inquirer.prompt([
         {
             message: "Song:",
@@ -66,7 +66,7 @@ function spotifyReq() {
     })
 }
 
-function twitterReq() {
+const twitterReq = () => {
     inquirer.prompt([
         {
             message: "Twitter Name:",
